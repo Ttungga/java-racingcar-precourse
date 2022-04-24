@@ -1,0 +1,32 @@
+package racingcar.domain;
+
+import racingcar.service.InputValidator;
+
+public class TryCount {
+
+    private static final int MIN_TRY_COUNT = 1;
+    private static final int MAX_TRY_COUNT = 10;
+
+    private final int tryCount;
+
+    private TryCount(int tryCount) {
+        this.tryCount = tryCount;
+    }
+
+    public static TryCount of(final String tryCountInput) {
+        final int tryCount = InputValidator.validateTryCountInput(tryCountInput);
+        validateTryCount(tryCount);
+        return new TryCount(tryCount);
+    }
+
+    private static void validateTryCount(int tryCount) {
+        if (tryCount < MIN_TRY_COUNT || tryCount > MAX_TRY_COUNT) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    public int getTryCount() {
+        return tryCount;
+    }
+
+}
