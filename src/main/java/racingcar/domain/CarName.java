@@ -8,7 +8,7 @@ public class CarName {
         this.carName = carName;
     }
 
-    public static CarName of(final String carName) {
+    static CarName of(final String carName) {
         validateCarName(carName);
         return new CarName(carName);
     }

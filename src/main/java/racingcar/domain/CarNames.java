@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import racingcar.service.InputValidator;
 
 public class CarNames {
 
@@ -13,20 +14,11 @@ public class CarNames {
         this.carNames = carNames;
     }
 
-    public static CarNames of(final List<CarName> carNames) {
-        return new CarNames(carNames);
-    }
-
-    public static CarNames of(final String[] carNameArray) {
+    public static CarNames of(final String carNamesInput) {
+        InputValidator.validateCarNamesInput(carNamesInput);
+        final String[] carNameArray = carNamesInput.split(",");
         validateCarNamesSize(carNameArray);
-        final List<CarName> carNameList = new ArrayList<>();
-        final Set<String> carNameSet = new HashSet<>();
-        for (String carName : carNameArray) {
-            carNameList.add(CarName.of(carName));
-            carNameSet.add(carName);
-        }
-        validateCarNamesDuplication(carNameList, carNameSet);
-        return new CarNames(carNameList);
+        return new CarNames(createCarNameList(carNameArray));
     }
 
     private static void validateCarNamesSize(final String[] carNameArray) {
@@ -39,6 +31,17 @@ public class CarNames {
         if (carNameList.size() != carNameSet.size()) {
             throw new IllegalArgumentException(ErrorMessage.CAR_NAMES_DUPLICATED.getMessage());
         }
+    }
+
+    private static List<CarName> createCarNameList(final String[] carNameArray) {
+        final List<CarName> carNameList = new ArrayList<>();
+        final Set<String> carNameSet = new HashSet<>();
+        for (String carName : carNameArray) {
+            carNameList.add(CarName.of(carName));
+            carNameSet.add(carName);
+        }
+        validateCarNamesDuplication(carNameList, carNameSet);
+        return carNameList;
     }
 
     public int getSize() {

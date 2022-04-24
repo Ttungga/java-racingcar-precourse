@@ -5,9 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.Test;
 
-class CarNamesFactoryTest {
-
-    private final CarNamesFactory carNamesFactory = new CarNamesFactory();
+class CarNamesTest {
 
     @Test
     void 올바른_형식의_입력값이_들어오면_CarNames_객체가_생성되어야_한다() {
@@ -17,7 +15,7 @@ class CarNamesFactoryTest {
         // when and then
         for (String carNamesInput : carNamesInputArray) {
             final String[] carNameArray = carNamesInput.split(",");
-            final CarNames carNames = carNamesFactory.create(carNamesInput);
+            final CarNames carNames = CarNames.of(carNamesInput);
             assertThat(carNames).isNotNull();
             assertThat(carNames.getSize()).isEqualTo(carNameArray.length);
             assertThat(carNames.getCarName(0).getName()).isEqualTo(carNameArray[0]);
@@ -33,7 +31,7 @@ class CarNamesFactoryTest {
 
         // when and then
         for (String carNamesInput : carNamesInputArray) {
-            assertThatThrownBy(() -> carNamesFactory.create(carNamesInput))
+            assertThatThrownBy(() -> CarNames.of(carNamesInput))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage(ErrorMessage.CAR_NAMES_INPUT_HAS_NOT_ALLOWED_CHARACTER.getMessage());
         }
@@ -46,7 +44,7 @@ class CarNamesFactoryTest {
 
         // when and then
         for (String carNamesInput : carNamesInputArray) {
-            assertThatThrownBy(() -> carNamesFactory.create(carNamesInput))
+            assertThatThrownBy(() -> CarNames.of(carNamesInput))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage(ErrorMessage.CAR_NAMES_LESS_THAN_TWO.getMessage());
         }
@@ -59,7 +57,7 @@ class CarNamesFactoryTest {
 
         // when and then
         for (String carNamesInput : carNamesInputArray) {
-            assertThatThrownBy(() -> carNamesFactory.create(carNamesInput))
+            assertThatThrownBy(() -> CarNames.of(carNamesInput))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage(ErrorMessage.CAR_NAME_EMPTY_OR_LENGTH_OVER_FIVE.getMessage());
         }
@@ -72,7 +70,7 @@ class CarNamesFactoryTest {
 
         // when and then
         for (String carNamesInput : carNamesInputArray) {
-            assertThatThrownBy(() -> carNamesFactory.create(carNamesInput))
+            assertThatThrownBy(() -> CarNames.of(carNamesInput))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage(ErrorMessage.CAR_NAMES_DUPLICATED.getMessage());
         }
