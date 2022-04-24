@@ -34,31 +34,34 @@ class CarNamesFactoryTest {
         // when and then
         for (String carNamesInput : carNamesInputArray) {
             assertThatThrownBy(() -> carNamesFactory.create(carNamesInput))
-                    .isInstanceOf(IllegalArgumentException.class);
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage(ErrorMessage.CAR_NAMES_HAS_NOT_ALLOWED_CHARACTER.getMessage());
         }
     }
 
     @Test
     void 한_개_이하의_자동차_이름이_들어오면_IllegalArgumentException이_반환된다() {
         // given
-        final String[] carNamesInputArray = {",", "a", "a,", ",a"};
+        final String[] carNamesInputArray = {"a", "abcdef", "1"};
 
         // when and then
         for (String carNamesInput : carNamesInputArray) {
             assertThatThrownBy(() -> carNamesFactory.create(carNamesInput))
-                    .isInstanceOf(IllegalArgumentException.class);
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage(ErrorMessage.CAR_NAMES_LESS_THAN_TWO.getMessage());
         }
     }
 
     @Test
     void 자동차_이름이_1자_미만_6자_이상인_경우가_있으면_IllegalArgumentException이_반환된다() {
         // given
-        final String[] carNamesInputArray = {"a,123456", "a", "a,", ",a"};
+        final String[] carNamesInputArray = {"a,123456", "1,abcedf,2", "x1y2z3,abc,qwer"};
 
         // when and then
         for (String carNamesInput : carNamesInputArray) {
             assertThatThrownBy(() -> carNamesFactory.create(carNamesInput))
-                    .isInstanceOf(IllegalArgumentException.class);
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage(ErrorMessage.EMPTY_CAR_NAME_OR_LENGTH_OVER_FIVE.getMessage());
         }
     }
 
@@ -70,7 +73,8 @@ class CarNamesFactoryTest {
         // when and then
         for (String carNamesInput : carNamesInputArray) {
             assertThatThrownBy(() -> carNamesFactory.create(carNamesInput))
-                    .isInstanceOf(IllegalArgumentException.class);
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage(ErrorMessage.CAR_NAMES_DUPLICATED.getMessage());
         }
     }
 
