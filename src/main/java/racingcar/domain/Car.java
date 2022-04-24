@@ -1,5 +1,7 @@
 package racingcar.domain;
 
+import camp.nextstep.edu.missionutils.Randoms;
+
 public class Car {
 
     private final CarName carName;
@@ -22,6 +24,17 @@ public class Car {
 
     public int getMoveCount() {
         return moveCount;
+    }
+
+    public void move() {
+        if (Randoms.pickNumberInRange(0, 9) > 3) {
+            moveCount += 1;
+            moveResult += "-";
+        }
+    }
+
+    public void printMoveResult() {
+        System.out.println(moveResult);
     }
 
 }
