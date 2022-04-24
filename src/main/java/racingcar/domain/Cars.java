@@ -21,6 +21,13 @@ public class Cars {
         return new Cars(cars);
     }
 
+    public void moveCars() {
+        for (Car car : cars) {
+            car.move();
+            car.printMoveResult();
+        }
+    }
+
     public String getWinners() {
         String winners = "";
         for (Car car : cars) {
