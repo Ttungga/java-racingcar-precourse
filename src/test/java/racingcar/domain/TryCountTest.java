@@ -31,9 +31,9 @@ class TryCountTest {
     }
 
     @Test
-    void 입력값이_숫자이나_1보다_작거나_10보다_크면_IllegalArgumentException이_반환된다() {
+    void 입력값이_숫자이나_1보다_작으면_IllegalArgumentException이_반환된다() {
         // given
-        final String[] tryCountInputArray = {"0", "11"};
+        final String[] tryCountInputArray = {"0", "-1"};
 
         // when and then
         for (String tryCountInput : tryCountInputArray) {

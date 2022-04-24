@@ -5,7 +5,6 @@ import racingcar.service.InputValidator;
 public class TryCount {
 
     private static final int MIN_TRY_COUNT = 1;
-    private static final int MAX_TRY_COUNT = 10;
 
     private final int tryCount;
 
@@ -20,7 +19,7 @@ public class TryCount {
     }
 
     private static void validateTryCount(int tryCount) {
-        if (tryCount < MIN_TRY_COUNT || tryCount > MAX_TRY_COUNT) {
+        if (tryCount < MIN_TRY_COUNT) {
             throw new IllegalArgumentException();
         }
     }
