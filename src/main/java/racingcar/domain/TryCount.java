@@ -20,7 +20,7 @@ public class TryCount {
 
     private static void validateTryCount(int tryCount) {
         if (tryCount < MIN_TRY_COUNT) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ErrorMessage.TRY_COUNT_LESS_THAN_MIN.getMessage());
         }
     }
 

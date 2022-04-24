@@ -27,7 +27,8 @@ class TryCountTest {
 
         // when and then
         assertThatThrownBy(() -> TryCount.of(tryCountInput))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.TRY_COUNT_NOT_A_NUMBER.getMessage());
     }
 
     @Test
@@ -38,7 +39,8 @@ class TryCountTest {
         // when and then
         for (String tryCountInput : tryCountInputArray) {
             assertThatThrownBy(() -> TryCount.of(tryCountInput))
-                    .isInstanceOf(IllegalArgumentException.class);
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage(ErrorMessage.TRY_COUNT_LESS_THAN_MIN.getMessage());
         }
     }
 

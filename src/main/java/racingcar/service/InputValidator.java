@@ -17,7 +17,7 @@ public class InputValidator {
         try {
             return Integer.parseInt(tryCountInput);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ErrorMessage.TRY_COUNT_NOT_A_NUMBER.getMessage());
         }
     }
 
