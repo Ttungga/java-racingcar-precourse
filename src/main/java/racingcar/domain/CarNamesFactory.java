@@ -31,25 +31,25 @@ public class CarNamesFactory {
 
     private void validateNotAllowedCharacter(final String carNamesInput) {
         if (notAllowedCharacterPattern.matcher(carNamesInput).find()) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ErrorMessage.CAR_NAMES_HAS_NOT_ALLOWED_CHARACTER.getMessage());
         }
     }
 
     private void validateCarNamesSize(final String[] carNameArray) {
         if (carNameArray.length < 2) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ErrorMessage.CAR_NAMES_LESS_THAN_TWO.getMessage());
         }
     }
 
     private void validateCarNameLength(final String carName) {
         if (carName.length() < 1 || carName.length() > 5) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ErrorMessage.EMPTY_CAR_NAME_OR_LENGTH_OVER_FIVE.getMessage());
         }
     }
 
     private void validateDuplicatedCarName(final Set<String> carNameSet, final List<CarName> carNameList) {
         if (carNameSet.size() != carNameList.size()) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ErrorMessage.CAR_NAMES_DUPLICATED.getMessage());
         }
     }
 
