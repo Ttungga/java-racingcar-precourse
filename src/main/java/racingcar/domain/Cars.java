@@ -5,6 +5,8 @@ import java.util.List;
 
 public class Cars {
 
+    private static final String WINNER_SEPARATOR = ", ";
+
     private final List<Car> cars;
     private int maxMoveCount;
 
@@ -21,21 +23,40 @@ public class Cars {
         return new Cars(cars);
     }
 
-    public void moveCars() {
-        for (Car car : cars) {
-            car.move();
-            car.printMoveResult();
+    public void moveCars(final TryCount tryCount) {
+        for (int i = 0; i < tryCount.getTryCount(); i++) {
+            moveCarsOneTime();
+            System.out.println();
         }
     }
 
     public String getWinners() {
         String winners = "";
         for (Car car : cars) {
-            if (car.getMoveCount() == maxMoveCount) {
-                winners += ", " + car.getCarName().getName();
-            }
+            winners += verifyWinner(car);
         }
-        return winners.substring(1);
+        return winners.substring(WINNER_SEPARATOR.length());
+    }
+
+    private void moveCarsOneTime() {
+        for (Car car : cars) {
+            car.move();
+            car.printMoveResult();
+            updateMaxMoveCount(car);
+        }
+    }
+
+    private void updateMaxMoveCount(final Car car) {
+        if (car.getMoveCount() > maxMoveCount) {
+            maxMoveCount = car.getMoveCount();
+        }
+    }
+
+    private String verifyWinner(final Car car) {
+        if (car.getMoveCount() == maxMoveCount) {
+            return WINNER_SEPARATOR + car.getCarName().getName();
+        }
+        return "";
     }
 
 }
