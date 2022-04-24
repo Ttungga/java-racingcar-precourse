@@ -20,9 +20,9 @@ class CarNamesFactoryTest {
             final CarNames carNames = carNamesFactory.create(carNamesInput);
             assertThat(carNames).isNotNull();
             assertThat(carNames.getSize()).isEqualTo(carNameArray.length);
-            assertThat(carNames.getCarName(0)).isEqualTo(carNameArray[0]);
-            assertThat(carNames.getCarName(1)).isEqualTo(carNameArray[1]);
-            assertThat(carNames.getCarName(2)).isEqualTo(carNameArray[2]);
+            assertThat(carNames.getCarName(0).getName()).isEqualTo(carNameArray[0]);
+            assertThat(carNames.getCarName(1).getName()).isEqualTo(carNameArray[1]);
+            assertThat(carNames.getCarName(2).getName()).isEqualTo(carNameArray[2]);
         }
     }
 
@@ -35,7 +35,7 @@ class CarNamesFactoryTest {
         for (String carNamesInput : carNamesInputArray) {
             assertThatThrownBy(() -> carNamesFactory.create(carNamesInput))
                     .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(ErrorMessage.CAR_NAMES_HAS_NOT_ALLOWED_CHARACTER.getMessage());
+                    .hasMessage(ErrorMessage.CAR_NAMES_INPUT_HAS_NOT_ALLOWED_CHARACTER.getMessage());
         }
     }
 
@@ -61,7 +61,7 @@ class CarNamesFactoryTest {
         for (String carNamesInput : carNamesInputArray) {
             assertThatThrownBy(() -> carNamesFactory.create(carNamesInput))
                     .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(ErrorMessage.EMPTY_CAR_NAME_OR_LENGTH_OVER_FIVE.getMessage());
+                    .hasMessage(ErrorMessage.CAR_NAME_EMPTY_OR_LENGTH_OVER_FIVE.getMessage());
         }
     }
 
