@@ -11,7 +11,7 @@ public class Car {
     private Car(final CarName carName) {
         this.carName = carName;
         moveCount = 0;
-        moveResult = carName + ": ";
+        moveResult = carName.getName() + ": ";
     }
 
     static Car of(final CarName carName) {
